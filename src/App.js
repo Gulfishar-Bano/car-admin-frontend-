@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import ProtectedRoute from "./component/protectedRoute";
+import Login from "./pages/login";
+import Dashboard from "./pages/dashboard";
+import AddCar from "./pages/cars/AddCar";
+import SidebarLayout from "./layout/SidebarLayout"; 
+import CarList from "./pages/cars/CarList";
+import DriverList from "./pages/Drivers/DriverList";
+import FareList from "./pages/fares/FareList";
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <BrowserRouter>
+      <Routes>
+
+      
+        <Route path="/login" element={<Login />} />
+
+      
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <SidebarLayout /> 
+            </ProtectedRoute>
+          }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          
+          <Route index element={<Dashboard />} /> 
+          
+         
+          <Route path="/dashboard" element={<Dashboard />} /> 
+          
+        <Route path="/cars" element={<CarList />} />
+       
+    <Route path="/cars/add" element={<AddCar />} />
+     <Route path="/drivers" element={<DriverList />} />
+
+      <Route path="/fares" element={<FareList />} />
+
+         
+        </Route>
+
+      </Routes>
+    </BrowserRouter>
   );
 }
+
 
 export default App;

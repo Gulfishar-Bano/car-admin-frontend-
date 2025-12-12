@@ -1,0 +1,127 @@
+/* MAIN FORM WRAPPER */
+.car-form-container {
+    /* Using Pure White for the card on the light grey background */
+    width: 100%;
+    max-width: 680px; /* Slightly wider for a more professional feel */
+    margin: 40px auto;
+    padding: 35px 40px; /* Increased padding */
+    background: #FFFFFF; /* Pure white card background */
+    border-radius: 12px;
+    /* Subtle, professional shadow */
+    box-shadow: 0 6px 20px rgba(52, 58, 64, 0.08); /* Darker, less diffused shadow */
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+/* FORM TITLE */
+.car-form-container h3 {
+    text-align: center;
+    /* Using the near-black corporate text color */
+    color: #343A40;
+    margin-bottom: 30px; /* More space below the main title */
+    font-size: 28px; /* Slightly larger title */
+    font-weight: 700; /* Bold title for strong hierarchy */
+}
+
+/* FORM GROUP */
+.form-group {
+    margin-bottom: 25px; /* Increased spacing between form groups */
+}
+
+/* LABEL */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    /* Using the corporate text color for strong labels */
+    color: #343A40;
+}
+
+/* INPUT + SELECT + TEXTAREA */
+.form-group input:not([type="radio"]):not([type="file"]),
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 15px; /* Slightly more padding for a taller, cleaner field */
+    /* Lighter, subtle border */
+    border: 1px solid #DEE2E6;
+    border-radius: 8px;
+    font-size: 16px; /* Slightly larger font size inside input */
+    color: #495057; /* Input text color */
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    /* Primary Accent Blue for focus */
+    border-color: #212F3D;
+    /* Clean, defined focus ring using the primary accent color */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* TEXTAREA */
+textarea {
+    resize: vertical; /* Allows resizing vertically, but not horizontally */
+}
+
+/* RADIO GROUP */
+.radio-group {
+    display: flex;
+    gap: 35px; /* Increased gap */
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    color: #343A40; /* Stronger color for radio labels */
+}
+
+/* FILE INPUT */
+.form-group input[type="file"] {
+    border: none;
+    padding: 5px 0;
+}
+
+/* PREVIEW IMAGE */
+.car-preview {
+    width: 180px; /* Slightly larger preview */
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid #DEE2E6; /* Subtle border for definition */
+    object-fit: cover;
+}
+
+/* SAVE BUTTON (Primary Action) */
+.save-btn {
+    width: 100%;
+    padding: 14px; /* Taller button for emphasis */
+    /* Primary Accent Blue */
+    background: #212F3D;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 17px;
+    font-weight: 700; /* Extra bold for main action */
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-top: 25px; /* More space above button */
+    transition: background 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Subtle blue shadow */
+}
+
+.save-btn:hover {
+    background: #0056b3;
+    transform: translateY(-1px); /* Subtle lift on hover */
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

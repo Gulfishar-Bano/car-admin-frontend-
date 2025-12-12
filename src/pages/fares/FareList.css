@@ -1,0 +1,168 @@
+/* --- Global Container and Typography --- */
+.fare-management-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.fare-management-container h2 {
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
+/* --- Search Bar Styling --- */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar input[type="text"] {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex-grow: 1;
+    font-size: 1em;
+}
+
+/* --- General Button Styling --- */
+.fare-management-container button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    font-size: 1em;
+}
+
+.fare-management-container button:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.fare-management-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* --- Primary Button (Add New Fare) --- */
+.fare-management-container > button:not(.search-bar button) {
+    background-color: #007bff;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* --- Search Bar Buttons --- */
+.search-bar button {
+    background-color: #28a745;
+    color: white;
+}
+
+.search-bar button[type="button"] { /* Clear button */
+    background-color: #f0ad4e;
+}
+
+
+/* --- Fare Table Styling --- */
+.fare-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden; /* Ensures rounded corners are applied */
+}
+
+.fare-table th, 
+.fare-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.fare-table th {
+    background-color: #e9ecef;
+    color: #495057;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.fare-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* --- Highlighted Columns (Final Price) --- */
+.fare-table .highlight {
+    background-color: #d1ecf1; /* Light blue background for clarity */
+    color: #0c5460;
+    font-weight: bold;
+}
+
+.fare-table .final-fare {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: #155724; /* Dark green for price */
+    background-color: #d4edda;
+}
+
+/* --- Action Button Styling within Table --- */
+.fare-table td button {
+    margin-right: 8px;
+    padding: 6px 10px;
+    font-size: 0.85em;
+}
+
+.fare-table .btn-edit {
+    background-color: #007bff;
+    color: white;
+}
+
+.fare-table .btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* --- Form Modal Overlay (If using FareForm as a modal) --- */
+.fare-form-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Ensure FareForm component is styled separately for better structure, 
+   but the modal should center it. */
+.fare-form-modal > div {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}

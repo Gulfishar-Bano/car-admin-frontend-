@@ -1,0 +1,25 @@
+.dashboard-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 80vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-wrapper h1 {
+  font-size: 32px;
+  color: #2c2c2c;
+  margin-bottom: 10px;
+   margin-left: 350px;
+}
+
+.dashboard-wrapper p {
+  color: #555;
+  font-size: 18px;
+  margin-left: 300px;
+ 
+}
+

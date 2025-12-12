@@ -1,0 +1,90 @@
+
+/* MAIN LAYOUT WRAPPER */
+.layout {
+    /* Subtle, professional light grey background */
+    background-color: #F8F9FA; 
+    min-height: 100vh;
+    display: flex; /* Helps manage the sidebar and content relationship */
+}
+
+/* Sidebar */
+.sidebar {
+    /* Deep Navy Blue for a rich, professional sidebar */
+    background-color: #212F3D; 
+    color: #ECF0F1; /* Light text for contrast */
+    width: 230px;
+    padding: 20px 15px;
+    /* Keeping fixed for a traditional dashboard look */
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Logo/Admin Heading */
+.logo {
+    margin-bottom: 30px;
+    font-size: 26px; /* Slightly larger for presence */
+    font-weight: 700;
+    color: #FFFFFF; /* Pure white text */
+    text-align: center;
+    padding-bottom: 10px;
+    /* Subtle line to separate logo from links */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 10px 0; /* Reduced margin for a denser, cleaner list */
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #B0C4DE; /* Lighter color for non-active links */
+    font-size: 16px;
+    display: flex; /* Use flex for potential icon alignment */
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px; /* Slightly more modern rounded corners */
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* SIDEBAR HOVER */
+.sidebar a:hover {
+    background-color: #2C3E50; /* Subtle hover background */
+    color: #FFFFFF;
+}
+
+/* ACTIVE SIDEBAR LINK - Assume you add the 'active' class via JavaScript/Framework */
+.sidebar a.active {
+    /* Use the Primary Accent Blue for the active background */
+    background-color: #007BFF; 
+    color: #FFFFFF;
+    font-weight: 600;
+    /* Optional: A subtle box shadow for lift */
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.4); 
+}
+
+/* MAIN CONTENT AREA */
+.content {
+    /* Margin to clear the fixed sidebar width */
+    margin-left: 230px;
+
+    /* Increased padding for better breathing room */
+    padding: 30px; 
+    
+    min-height: 100vh;
+    /* Ensure the content uses 100% of the *remaining* width */
+    width: calc(100% - 230px); 
+    box-sizing: border-box;
+
+    /* Removed centering styles to let dashboard content breathe naturally */
+    display: block; /* Change from flex to block for standard content flow */
+    /* Removed justify-content/align-items/flex-direction: column; */
+}

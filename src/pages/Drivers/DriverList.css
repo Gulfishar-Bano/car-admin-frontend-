@@ -1,0 +1,244 @@
+/* --- CONTAINER & CARD WRAPPER --- */
+
+.driverlist-container {
+    /* Increased padding to match the refined layout */
+    padding: 30px;
+}
+
+.driverlist-card {
+    background: #FFFFFF; /* Pure White Card */
+    padding: 30px; /* Increased padding */
+    border-radius: 12px;
+    /* Subtle, professional shadow */
+    box-shadow: 0 6px 20px rgba(52, 58, 64, 0.08);
+}
+
+.driverlist-title {
+    /* Use strong corporate text color and bold weight */
+    color: #343A40;
+    margin-bottom: 25px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* --- HEADER BUTTONS (Driver List / + Add Driver) --- */
+
+.driverlist-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px; /* Increased margin */
+}
+
+/* Base style for both buttons */
+.driverlist-btn {
+    padding: 10px 22px;
+    border: 1px solid #DEE2E6; /* Light, defined border for both */
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600; /* Bolder text */
+    transition: all 0.2s ease;
+    font-size: 15px;
+}
+
+/* Secondary Button (e.g., '+ Add Driver' when not active, or vice-versa) */
+.driverlist-btn:not(.active) {
+    background: #FFFFFF;
+    color: #343A40;
+}
+
+.driverlist-btn:not(.active):hover {
+    background: #F8F9FA;
+    border-color: #CED4DA;
+}
+
+/* Primary/Active Button (e.g., 'Driver List') */
+.driverlist-btn.active {
+    background: #212F3D; /* Primary Accent Blue */
+    color: white;
+    border-color: #212F3D;
+    box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3);
+}
+
+.driverlist-btn.active:hover {
+    background: #3d5975;
+    border-color: #0056b3;
+}
+
+
+/* --- TABLE STRUCTURE & HEADERS --- */
+
+.driverlist-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Table Header (th) */
+.driverlist-table th {
+    /* Use the Accent Blue for the header background */
+    background: #212F3D;
+    color: #FFFFFF;
+    font-weight: 700;
+    text-align: left;
+    padding: 15px 15px;
+    border: none;
+    border-bottom: 0 !important;
+}
+
+/* Table Data Cells (td) */
+.driverlist-table td {
+    /* Use a very light separator line */
+    border-bottom: 1px solid #EAECEE;
+    padding: 14px 15px;
+    color: #495057;
+}
+
+/* Alternating Row Color for readability */
+.driverlist-table tbody tr:nth-child(even) {
+    background-color: #FDFDFD; /* Very faint contrast */
+}
+
+/* Ensure the last row has no bottom border */
+.driverlist-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* --- ACTIONS COLUMN & BUTTONS --- */
+
+.action-col {
+    position: relative;
+    /* Center the action items within the cell */
+    text-align: center;
+}
+
+/* ACTION BUTTON STYLING (The primary button/trigger in the cell) */
+.action-btn {
+    /* We are resetting this to be a subtle, professional button/icon trigger
+       instead of a large, dark block that hides the dropdown trigger. */
+    background: #212F3D; /* Primary Accent Blue for a clear action */
+    color: white; /* White text/icon */
+    border: none;
+    padding: 8px 15px; /* Tidy padding */
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s;
+    /* Ensure it is always visible and doesn't hide on hover */
+    opacity: 1;
+}
+
+.action-btn:hover {
+    background: #0056b3; /* Darker blue on hover */
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+}
+
+/* The Dropdown Menu */
+.action-menu {
+    position: absolute;
+    /* FIX FOR OVERLAP: Place the menu beneath the button (top: 100%) */
+    top: 100%;
+    right: 0;
+
+    background: white;
+    border: 1px solid #CED4DA;
+    border-radius: 6px;
+    min-width: 120px;
+    /* CRITICAL FIX: Ensure the menu is layered above everything else */
+    z-index: 100;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    animation: fadeIn 0.2s ease;
+}
+
+.action-menu p {
+    padding: 10px 15px;
+    margin: 0;
+    cursor: pointer;
+    font-size: 15px;
+    color: #495057;
+}
+
+.action-menu p:hover {
+    background: #F8F9FA;
+    color: #212F3D; /* Accent Blue hover text */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Updated CSS for the Toggle Switch Control --- */
+
+.status-col {
+    text-align: center; 
+}
+
+/* The switch - container for the checkbox */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px; /* Increased width to match reference toggle */
+  height: 25px; 
+}
+
+/* Hide default HTML checkbox */
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider track */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc; /* Inactive color (Light Grey) */
+  transition: .4s;
+  border-radius: 34px; /* Pill shape */
+}
+
+/* The slider circle (thumb) */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px; 
+  width: 17px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%; /* Circle shape */
+}
+
+/* Color when checked (Active color: Blue, matching the navigation bar color) */
+input:checked + .slider {
+  /* Use a color close to the blue in your reference image */
+  background-color: #3f51b5; /* A standard Material Blue */ 
+}
+
+/* Move the circle when checked */
+input:checked + .slider:before {
+  transform: translateX(25px); /* Increased travel distance */
+}
+
+/* In DriverForm.css */
+
+.error-message {
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+    margin-bottom: 0;
+    /* Optional: Make inputs with errors clearly visible */
+    border-left: 3px solid red; 
+    padding-left: 5px;
+}
