@@ -16,6 +16,7 @@ const SidebarLayout = ({ children }) => {
           <li><Link to="/fares">Fares</Link></li>
           <li><Link to="/markup">Markup</Link></li>
           <li><Link to="/users">Users</Link></li>
+          <li><Link to="/Bookings">Bookings</Link></li>
         </ul>
       </div>
 

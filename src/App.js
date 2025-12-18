@@ -7,7 +7,7 @@ import SidebarLayout from "./layout/SidebarLayout";
 import CarList from "./pages/cars/CarList";
 import DriverList from "./pages/Drivers/DriverList";
 import FareList from "./pages/fares/FareList";
-
+import BookingList from "./pages/Bookings/Booking";
 
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
      <Route path="/drivers" element={<DriverList />} />
 
       <Route path="/fares" element={<FareList />} />
-
+<Route path="/bookings" element={<BookingList />} />
          
         </Route>
 

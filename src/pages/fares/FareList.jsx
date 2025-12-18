@@ -1,32 +1,30 @@
 import React, { useState, useEffect, useCallback } from 'react';
-// Import the new functions from api.js
+
 import { 
     getFares, 
     addFare, 
     deleteFare, 
-    findByLocation, // Corrected import for route search
-    updateFare // New function for editing
+    findByLocation, 
+    updateFare
 } from '../../services/api'; 
 import FareForm from './FareForm'; 
-import './FareList.css'; // Assuming you have a CSS file for styling
+import './FareList.css'; 
 
 const FareList = () => {
     const [fares, setFares] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isFormVisible, setIsFormVisible] = useState(false);
-    // NEW: State to hold the data of the fare being edited
     const [editingFare, setEditingFare] = useState(null); 
     const [searchLocation, setSearchLocation] = useState({ from: '', to: '' });
      const [dropdownOpen, setDropdownOpen] = useState(null);
     const [showForm, setShowForm] = useState(false);
-    // --- Data Fetching Function ---
-    // Renamed findFaresByLocation to findByLocation to match your latest api.js
+    
     const fetchFares = useCallback(async (searchQuery = null) => {
         setLoading(true);
         try {
             let fetchedFares;
             if (searchQuery && searchQuery.from && searchQuery.to) {
-                // Use the location search function
+     
                 fetchedFares = await findByLocation(searchQuery.from, searchQuery.to);
             } else {
                 fetchedFares = await getFares();
@@ -34,7 +32,7 @@ const FareList = () => {
             setFares(fetchedFares);
         } catch (error) {
             console.error("Error fetching fares:", error);
-            // Handle 400 'not found' errors gracefully by setting fares to empty array
+         
             if (error.message.includes("not found") || error.message.includes("400")) {
                 setFares([]);
             } else {
@@ -54,7 +52,6 @@ const FareList = () => {
         fetchFares();
     }, [fetchFares]);
 
-    // --- Search Handlers (Unchanged) ---
     const handleSearchChange = (e) => {
         const { name, value } = e.target;
         setSearchLocation(prev => ({ ...prev, [name]: value }));
@@ -79,49 +76,24 @@ const FareList = () => {
                 alert("Failed to delete fare.");
             }
         }
-        setDropdownOpen(null); // close dropdown
+        setDropdownOpen(null); 
     };
 
     
-    // ------------------------------------
-
-    // --- NEW: Edit Handlers ---
-    const handleEditClick = (fare) => {
-        setEditingFare(fare); // Set the fare data for the form
-        setIsFormVisible(true); // Show the form
-    };
-
-    // --- NEW: Delete Handler ---
-    const handleDeleteFare = async (id) => {
-        if (!window.confirm(`Are you sure you want to delete Fare ID ${id}? This action cannot be undone.`)) {
-            return;
-        }
-
-        try {
-            await deleteFare(id); // Call the newly available deleteFare function
-            alert(`Fare ID ${id} deleted successfully.`);
-            fetchFares(); // Refresh the list
-        } catch (error) {
-            console.error("Error deleting fare:", error);
-            alert(`Failed to delete fare: ${error.message}`);
-        }
-    };
-    // ----------------------------
-
-    // --- Form Submission Handler (Updated for Add/Edit) ---
+  
     const handleFormSubmit = async (fareData) => {
         try {
             if (editingFare) {
-                // UPDATE logic
-                await updateFare(editingFare.id, fareData); // Call updateFare
+                
+                await updateFare(editingFare.id, fareData); 
                 alert(`Fare ID ${editingFare.id} updated successfully.`);
             } else {
-                // ADD logic
-                await addFare(fareData); // Call addFare
+                
+                await addFare(fareData); 
                 alert("New fare added successfully.");
             }
             
-            // Cleanup and Refresh
+            
             setEditingFare(null); 
             setIsFormVisible(false);
             fetchFares(); 
@@ -131,13 +103,13 @@ const FareList = () => {
         }
     };
 
-    // --- Table Rendering Logic ---
+    
     const renderTable = () => {
         if (loading) return <p>Loading fares and applying markup...</p>;
         if (fares.length === 0) return <p>No fares found. {searchLocation.from ? 'Try clearing the search.' : ''}</p>;
 
         const firstFare = fares[0];
-        // Ensure markupType exists before trying to display it
+    
         const markupType = firstFare?.markupType || 'Unknown';
 
         return (
@@ -160,10 +132,10 @@ const FareList = () => {
             <td>{fare.car?.model || 'N/A'}</td>
             <td>{fare.FromLocation} &rarr; {fare.ToLocation}</td>
             
-            {/* FIX 1: Convert fare.fare to a Number before calling toFixed() */}
+           
             <td>₹{Number(fare.fare).toFixed(2)}</td> 
             
-            {/* FIX 2: Apply the same fix to markupValue and finalFare just in case */}
+          
             <td>₹{Number(fare.markupValue).toFixed(2)}</td> 
             
             <td className="final-fare">₹{Number(fare.finalFare).toFixed(2)}</td>
@@ -224,11 +196,11 @@ const FareList = () => {
                 + Add New Fare
             </button>
 
-            {/* --- Form Modal/Display (Now passes initialData for editing) --- */}
+           
             {isFormVisible && (
                 <div className="fare-form-modal">
                     <FareForm 
-                        initialData={editingFare} // Pass the fare object if editing, or null if adding
+                        initialData={editingFare} 
                         onSubmit={handleFormSubmit} 
                         onCancel={() => { setEditingFare(null); setIsFormVisible(false); }} 
                     />

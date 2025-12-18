@@ -1,25 +1,57 @@
-.dashboard-wrapper {
-  width: 100%;
-  height: 100%;
-  min-height: 80vh;
+/* Dashboard.css */
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.stats-container {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
 }
 
-.dashboard-wrapper h1 {
-  font-size: 32px;
-  color: #2c2c2c;
-  margin-bottom: 10px;
-   margin-left: 350px;
+.stats-container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
 }
 
-.dashboard-wrapper p {
-  color: #555;
-  font-size: 18px;
-  margin-left: 300px;
- 
+.status-cards-row {
+    display: flex;
+    gap: 20px; /* Space between cards */
 }
 
+.status-card {
+    flex: 1; /* Makes cards equally wide */
+    padding: 15px 20px;
+    border-radius: 6px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-card h3 {
+    font-size: 1em;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.status-value {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Specific Colors for Cool Effect */
+.total-card {
+    background-color: #5a5a5a; /* Dark Gray/Blue for total */
+}
+
+.active-card {
+    background-color: #28a745; /* Green for Active */
+}
+
+.inactive-card {
+    background-color: #dc3545; /* Red for Inactive */
+}
