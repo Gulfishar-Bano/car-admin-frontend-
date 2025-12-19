@@ -150,15 +150,15 @@ const FareList = () => {
                                         </button>
                                         {dropdownOpen === fare.id && (
                                             <div className="action-menu">
-                                                <p
-                                                    onClick={() => {
-                                                        setEditingFare(fare); 
-                                                        setShowForm(true);  
-                                                        setDropdownOpen(null);
-                                                    }}
-                                                >
-                                                    Edit
-                                                </p>
+                                               <p
+    onClick={() => {
+        setEditingFare(fare); 
+        setIsFormVisible(true); // Use the same state as "Add New Fare"
+        setDropdownOpen(null);
+    }}
+>
+    Edit
+</p>
                                                 <p onClick={() => handleDelete(fare.id)}>Delete</p>
                                             </div>
                                         )}
@@ -191,11 +191,12 @@ const FareList = () => {
                 <button type="button" onClick={handleClearSearch}>Clear</button>
             </form>
             <hr/>
-
-            <button onClick={() => { setEditingFare(null); setIsFormVisible(true); }}>
-                + Add New Fare
-            </button>
-
+<button className="add-fare-btn" onClick={() => { 
+    setEditingFare(null); 
+    setIsFormVisible(true); 
+}}>
+    + Add New Fare
+</button>
            
             {isFormVisible && (
                 <div className="fare-form-modal">

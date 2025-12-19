@@ -1,0 +1,47 @@
+.markup-container { padding: 30px; max-width: 900px; }
+
+.markup-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+}
+
+.markup-form { 
+  display: flex; 
+  flex-direction: column;
+  gap: 10px;
+   align-items:flex-start;
+    margin-top: 20px; 
+  }
+
+.form-group { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+
+.form-group input, .form-group select {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+.save-btn {
+  background: #2c3e50;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  height: 45px;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+}
+.badge.active { background: #e6fffa; color: #2c7a7b; }
+.badge.old { background: #f7fafc; color: #a0aec0; }
+
+.delete-text { color: #e53e3e; border: none; background: none; cursor: pointer; }

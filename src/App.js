@@ -8,6 +8,8 @@ import CarList from "./pages/cars/CarList";
 import DriverList from "./pages/Drivers/DriverList";
 import FareList from "./pages/fares/FareList";
 import BookingList from "./pages/Bookings/Booking";
+import MarkupManagement from "./pages/markups/markup";
+import UserList from "./pages/users/UserList";
 
 
 function App() {
@@ -40,7 +42,8 @@ function App() {
 
       <Route path="/fares" element={<FareList />} />
 <Route path="/bookings" element={<BookingList />} />
-         
+<Route path="/markup" element={<MarkupManagement/>}/>
+        <Route path="/users" element={<UserList/>}/> 
         </Route>
 
       </Routes>

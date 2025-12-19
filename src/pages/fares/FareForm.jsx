@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getCars } from '../../services/api'; // Import the function to fetch cars
-import './FareForm.css'; // Assuming you create a corresponding CSS file
+import { getCars } from '../../services/api'; 
+import './FareForm.css'; 
 
-// --- Static Placeholder Markup (Simulating the MarkupService logic) ---
-// This must be replaced with a real API call if the markup is dynamic.
 const PLACEHOLDER_MARKUP = {
-    type: 'percentage', // Could be 'fixed'
-    value: 10,          // 10% or 10 units
+    type: 'percentage', 
+    value: 10,         
 };
 
 const calculateFinalFare = (baseFare, markup) => {
@@ -38,22 +36,33 @@ const FareForm = ({ initialData, onSubmit, onCancel }) => {
 
     // --- State for Real-Time Price Preview ---
     const [finalFare, setFinalFare] = useState(0); 
+// This ensures that when you click 'Edit', the form fills with the new data
+useEffect(() => {
+    if (initialData) {
+        setFormData({
+            carId: initialData.car?.id?.toString() || '', 
+            FromLocation: initialData.FromLocation || '',
+            ToLocation: initialData.ToLocation || '',
+            fare: initialData.fare?.toString() || '',
+        });
+    }
+}, [initialData]);
 
-    // 1. Fetch Car Options
-    useEffect(() => {
-        const fetchCarsData = async () => {
-            setLoadingCars(true);
-            try {
-                const cars = await getCars();
-                setCarOptions(cars);
-            } catch (error) {
-                console.error("Failed to load cars for form:", error);
-            } finally {
-                setLoadingCars(false);
-            }
-        };
-        fetchCarsData();
-    }, []);
+ useEffect(() => {
+    const fetchCarsData = async () => {
+        setLoadingCars(true);
+        try {
+            const cars = await getCars();
+            console.log("Cars from API:", cars); // CHECK YOUR CONSOLE WITH THIS
+            setCarOptions(Array.isArray(cars) ? cars : Object.values(cars));
+        } catch (error) {
+            console.error("Failed to load cars:", error);
+        } finally {
+            setLoadingCars(false);
+        }
+    };
+    fetchCarsData();
+}, []);
 
     // 2. Calculate Final Fare on input change
     useEffect(() => {
@@ -70,7 +79,7 @@ const FareForm = ({ initialData, onSubmit, onCancel }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        // Simple client-side validation
+       
         if (!formData.carId || !formData.FromLocation || !formData.ToLocation || !Number(formData.fare)) {
             alert("Please fill in all required fields.");
             return;
@@ -102,20 +111,21 @@ const FareForm = ({ initialData, onSubmit, onCancel }) => {
                 {/* Input 1: Car Selection */}
                 <div className="form-group">
                     <label htmlFor="carId">Car</label>
-                    <select
-                        id="carId"
-                        name="carId"
-                        value={formData.carId}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="" disabled>Select a Car</option>
-                        {carOptions.map(car => (
-                            <option key={car.id} value={car.id}>
-                                {car.name} ({car.plateNumber})
-                            </option>
-                        ))}
-                    </select>
+                   <select
+    id="carId"
+    name="carId"
+    value={formData.carId}
+    onChange={handleChange}
+    required
+>
+    <option value="" disabled>Select a Car</option>
+    {carOptions.map(car => (
+        <option key={car.id} value={car.id}>
+            {/* Check if it's .model or .Model or .Name based on your DB */}
+            {car.model || car.Model || car.name} {car.plateNumber ? `(${car.plateNumber})` : ''}
+        </option>
+    ))}
+</select>
                 </div>
 
                 {/* Input 2: From Location */}
@@ -130,9 +140,10 @@ const FareForm = ({ initialData, onSubmit, onCancel }) => {
                     <input type="text" name="ToLocation" value={formData.ToLocation} onChange={handleChange} required />
                 </div>
 
+           
                 {/* Input 4: Base Fare */}
                 <div className="form-group">
-                    <label htmlFor="fare">Base Fare (₹)</label>
+                    <label htmlFor="fare">Base Fare </label>
                     <input 
                         type="number" 
                         name="fare" 

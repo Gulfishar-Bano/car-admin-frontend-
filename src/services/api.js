@@ -220,3 +220,46 @@ export const findByLocation = async (fromLoc, toLoc) => {
         return [];
     }
 }
+
+
+export const getMarkups = async () => {
+  const response = await axios.get(`${BASE_URL}/markup/list`);
+  return response.data;
+};
+
+export const createMarkup = async (data) => {
+  const response = await axios.post(`${BASE_URL}/markup/create`, data);
+  return response.data;
+};
+
+export const deleteMarkup = async (id) => {
+  const response = await axios.delete(`${BASE_URL}/markup/delete/${id}`);
+  return response.data;
+};
+
+export const getLatestMarkup = async () => {
+  const response = await axios.get(`${BASE_URL}/markup/latest`);
+  return response.data;
+};
+
+// Add these to your existing api.js
+export const getUsers = async () => {
+  const response = await axios.get(`${BASE_URL}/jwt-auth/users`); // Adjust path to match your controller
+  return response.data;
+};
+
+export const toggleUserStatus = async (id) => {
+  const response = await axios.put(`${BASE_URL}/jwt-auth/toggle/${id}`);
+  return response.data;
+};
+
+export const updateUserRole = async (id, role) => {
+  const response = await axios.patch(`${BASE_URL}/jwt-auth/update/${id}`, { role });
+  return response.data;
+};
+
+export const getDashboardStats=async() =>
+  {
+  const response=await axios.get(`${BASE_URL}/jwt-auth/dashboard`);
+  return response.data;
+}
