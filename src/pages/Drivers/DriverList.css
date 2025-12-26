@@ -1,7 +1,7 @@
-/* --- CONTAINER & CARD WRAPPER --- */
+
 
 .driverlist-container {
-    /* Increased padding to match the refined layout */
+   
     padding: 30px;
 }
 
@@ -14,7 +14,7 @@
 }
 
 .driverlist-title {
-    /* Use strong corporate text color and bold weight */
+    
     color: #343A40;
     margin-bottom: 25px;
     font-size: 20px;
@@ -22,12 +22,10 @@
 }
 
 
-/* --- HEADER BUTTONS (Driver List / + Add Driver) --- */
-
 .driverlist-buttons {
     display: flex;
     gap: 15px;
-    margin-bottom: 25px; /* Increased margin */
+    margin-bottom: 25px; 
 }
 
 /* Base style for both buttons */
@@ -41,7 +39,7 @@
     font-size: 15px;
 }
 
-/* Secondary Button (e.g., '+ Add Driver' when not active, or vice-versa) */
+
 .driverlist-btn:not(.active) {
     background: #FFFFFF;
     color: #343A40;
@@ -52,7 +50,6 @@
     border-color: #CED4DA;
 }
 
-/* Primary/Active Button (e.g., 'Driver List') */
 .driverlist-btn.active {
     background: #212F3D; /* Primary Accent Blue */
     color: white;
@@ -66,14 +63,14 @@
 }
 
 
-/* --- TABLE STRUCTURE & HEADERS --- */
+
 
 .driverlist-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 0;
     border-radius: 10px;
-    overflow: hidden;
+    overflow:visible;
 }
 
 /* Table Header (th) */
@@ -107,15 +104,13 @@
 }
 
 
-/* --- ACTIONS COLUMN & BUTTONS --- */
-
 .action-col {
     position: relative;
     /* Center the action items within the cell */
     text-align: center;
+    overflow: visible;
 }
 
-/* ACTION BUTTON STYLING (The primary button/trigger in the cell) */
 .action-btn {
     /* We are resetting this to be a subtle, professional button/icon trigger
        instead of a large, dark block that hides the dropdown trigger. */
@@ -137,22 +132,18 @@
     box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
 }
 
-/* The Dropdown Menu */
 .action-menu {
     position: absolute;
-    /* FIX FOR OVERLAP: Place the menu beneath the button (top: 100%) */
-    top: 100%;
+    top: 100%; 
     right: 0;
-
     background: white;
-    border: 1px solid #CED4DA;
+    border: 1px solid #CED4DA; 
     border-radius: 6px;
     min-width: 120px;
-    /* CRITICAL FIX: Ensure the menu is layered above everything else */
-    z-index: 100;
-
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    animation: fadeIn 0.2s ease;
+    /* High z-index is good, but needs a visible parent */
+    z-index: 1000; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
+    display: block; /* Ensure it's not being hidden by logic elsewhere */
 }
 
 .action-menu p {

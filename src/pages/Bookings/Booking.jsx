@@ -22,7 +22,7 @@ const filteredBookings = bookings.filter((booking) => {
     try {
       setLoading(true);
       const response = await axios.get('http://localhost:3001/booking/list');
-      // Using Object.values in case your backend returns an object of objects
+     
       const bookingsArray = Array.isArray(response.data) ? response.data : Object.values(response.data);
       setBookings(bookingsArray);
     } catch (err) {

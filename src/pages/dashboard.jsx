@@ -1,27 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { getDashboardStats } from '../services/api'; // You'll create this endpoint
+import axios from 'axios';
+import { ResponsiveContainer, BarChart, Bar, XAxis, Tooltip, Cell, YAxis } from 'recharts';
 import './Dashboard.css';
 
 const Dashboard = () => {
-  const [stats, setStats] = useState({
-    users: 0,
-    bookings: 0,
-    fares: 0,
-    currentMarkup: 0,
-    systemStatus: 'Online'
+  // Initialize with empty arrays to prevent .map() errors before data loads
+  const [data, setData] = useState({
+    stats: [],
+    routes: [],
+    activities: [],
+    systemStatus: 'Offline'
   });
+  const [loading, setLoading] = useState(true);
+  
+  const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchDashboardData = async () => {
       try {
-        const data = await getDashboardStats();
-        setStats(data);
+        // Ensure this URL matches your backend port
+        const response = await axios.get(`${BASE_URL}/jwt-auth/dashboard`);
+        setData(response.data);
       } catch (err) {
-        console.error("Dashboard error:", err);
+        console.error("Dashboard Fetch Error:", err);
+      } finally {
+        setLoading(false);
       }
     };
-    fetchStats();
+    fetchDashboardData();
   }, []);
+
+  if (loading) return <div className="loader">Loading Carisma Dashboard...</div>;
 
   return (
     <div className="dashboard-container">
@@ -31,67 +40,58 @@ const Dashboard = () => {
           <p>Here’s what’s happening with Carisma today.</p>
         </div>
         <div className="system-badge">
-          <span className="pulse-dot"></span> System {stats.systemStatus}
+          <span className="pulse-dot"></span> System {data.systemStatus || 'Online'}
         </div>
       </header>
 
-      {/* --- STAT CARDS --- */}
+      {/* --- STAT CARDS (Dynamic) --- */}
       <div className="stats-grid">
-        <div className="stat-card">
-          <div className="stat-icon users">👥</div>
-          <div className="stat-info">
-            <h3>Total Users</h3>
-            <p className="stat-number">{stats.users}</p>
+        {data.stats?.map((stat, index) => (
+          <div className="stat-card" key={index}>
+            <div className="stat-icon" style={{ background: `${stat.color}22`, color: stat.color }}>
+              {stat.icon}
+            </div>
+            <div className="stat-info">
+              <h3>{stat.label}</h3>
+              <p className="stat-number">{stat.value}</p>
+            </div>
           </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon bookings">📅</div>
-          <div className="stat-info">
-            <h3>Total Bookings</h3>
-            <p className="stat-number">{stats.bookings}</p>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon revenue">💰</div>
-          <div className="stat-info">
-            <h3>Active Markup</h3>
-            <p className="stat-number">{stats.currentMarkup}%</p>
-          </div>
-        </div>
+        ))}
       </div>
 
       <div className="dashboard-main-content">
-        {/* --- UNIQUE FEATURE: ROUTE ANALYTICS --- */}
+        {/* --- ROUTE ANALYTICS (Recharts) --- */}
         <div className="content-card analytics">
           <h3>📈 Top Performing Routes</h3>
-          <div className="route-list">
-            <div className="route-item">
-              <span>Bangalore → Mysore</span>
-              <div className="progress-bar"><div className="fill" style={{width: '85%'}}></div></div>
-            </div>
-            <div className="route-item">
-              <span>Bangalore → Ramanagaram</span>
-              <div className="progress-bar"><div className="fill" style={{width: '60%'}}></div></div>
-            </div>
+          <div className="chart-wrapper" style={{ width: '100%', height: 250 }}>
+            <ResponsiveContainer>
+              <BarChart data={data.routes}>
+                <XAxis dataKey="name" axisLine={false} tickLine={false} />
+                <YAxis hide />
+                <Tooltip cursor={{ fill: 'transparent' }} />
+                <Bar dataKey="bookings" radius={[4, 4, 0, 0]}>
+                  {data.routes?.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={index === 0 ? '#4f46e5' : '#94a3b8'} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
-        {/* --- UNIQUE FEATURE: ACTIVITY FEED --- */}
+        {/* --- ACTIVITY FEED (Using your formatTimeAgo logic) --- */}
         <div className="content-card activity">
           <h3>🔔 Recent Activity</h3>
           <div className="feed-items">
-            <div className="feed-item">
-              <span className="time">Just now</span>
-              <p>New booking confirmed for <strong>Innova Crysta</strong></p>
-            </div>
-            <div className="feed-item">
-              <span className="time">15 mins ago</span>
-              <p>Markup updated to <strong>{stats.currentMarkup}%</strong></p>
-            </div>
-            <div className="feed-item">
-              <span className="time">1 hour ago</span>
-              <p>User <strong>Pallavi</strong> was promoted to Admin</p>
-            </div>
+            {data.activities?.map((item) => (
+              <div className="feed-item" key={item.id}>
+                <div className={`type-indicator ${item.type}`}></div>
+                <div className="feed-content">
+                  <p>{item.text}</p>
+                  <span className="time">{item.time}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
