@@ -4,7 +4,7 @@ import { ResponsiveContainer, BarChart, Bar, XAxis, Tooltip, Cell, YAxis } from 
 import './Dashboard.css';
 
 const Dashboard = () => {
-  // Initialize with empty arrays to prevent .map() errors before data loads
+
   const [data, setData] = useState({
     stats: [],
     routes: [],
@@ -18,7 +18,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        // Ensure this URL matches your backend port
+       
         const response = await axios.get(`${BASE_URL}/jwt-auth/dashboard`);
         setData(response.data);
       } catch (err) {
@@ -44,7 +44,7 @@ const Dashboard = () => {
         </div>
       </header>
 
-      {/* --- STAT CARDS (Dynamic) --- */}
+     
       <div className="stats-grid">
         {data.stats?.map((stat, index) => (
           <div className="stat-card" key={index}>
@@ -60,7 +60,7 @@ const Dashboard = () => {
       </div>
 
       <div className="dashboard-main-content">
-        {/* --- ROUTE ANALYTICS (Recharts) --- */}
+       
         <div className="content-card analytics">
           <h3>📈 Top Performing Routes</h3>
           <div className="chart-wrapper" style={{ width: '100%', height: 250 }}>
@@ -79,7 +79,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* --- ACTIVITY FEED (Using your formatTimeAgo logic) --- */}
         <div className="content-card activity">
           <h3>🔔 Recent Activity</h3>
           <div className="feed-items">

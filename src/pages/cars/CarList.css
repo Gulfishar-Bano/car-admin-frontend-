@@ -1,20 +1,20 @@
-/* --- CONTAINER & CARD WRAPPER --- */
+
 
 .carlist-container {
-    /* Increased padding to match the refined layout */
+  
     padding: 30px; 
 }
 
 .carlist-card {
-    background: #FFFFFF; /* Pure White Card */
-    padding: 30px; /* Increased padding */
+    background: #FFFFFF; 
+    padding: 30px;
     border-radius: 12px;
-    /* Subtle, professional shadow */
+
     box-shadow: 0 6px 20px rgba(52, 58, 64, 0.08);
 }
 
 .carlist-title {
-    /* Use strong corporate text color and bold weight */
+   
     color: #343A40; 
     margin-bottom: 25px;
     font-size: 20px;
@@ -22,15 +22,14 @@
 }
 
 
-/* --- HEADER BUTTONS (Car List / + Add Car) --- */
+
 
 .carlist-buttons {
     display: flex;
     gap: 15px;
-    margin-bottom: 25px; /* Increased margin */
+    margin-bottom: 25px; 
 }
 
-/* Base style for both buttons */
 .carlist-btn {
     padding: 10px 22px;
     border: 1px solid #DEE2E6; /* Light, defined border for both */

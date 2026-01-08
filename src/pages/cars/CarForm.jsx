@@ -52,11 +52,11 @@ const CarForm = ({ initialData = {}, onSubmit }) => {
     
     // 3. Append the image file only if a new file object exists in state
     if (formData.image instanceof File) {
-        // The key 'image' must match the backend's FileInterceptor('image')
+        
         dataToSubmit.append('image', formData.image);
     }
     
-    // 4. Pass the correctly formatted FormData object to the parent handler (CarList)
+  
     onSubmit(dataToSubmit);
   };
 
@@ -81,10 +81,10 @@ const CarForm = ({ initialData = {}, onSubmit }) => {
     let newValue = value;
 
     if (name === "ac") {
-      // Handles radio buttons for boolean 'ac' state
+     
       newValue = value === "true"; 
     } else if (name === "noOfSeats") {
-      // Converts seats to a number, or handles empty string
+     
       newValue = value ? Number(value) : value;
     }
 

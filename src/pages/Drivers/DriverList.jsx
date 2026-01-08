@@ -3,7 +3,6 @@ import { getDrivers, deleteDriver, editDriver, addDriver } from "../../services/
 import DriverForm from "./DriverForm";
 import "./DriverList.css";
 
-// 1. IMPORT THE CUSTOM HOOK (Adjust path as needed, assuming 'context' is outside 'pages/Drivers')
 import { useDriverStatus } from '../Drivers/DriverStatusContext';
 
 
@@ -18,7 +17,7 @@ const DriverList = () => {
     const [editingDriver, setEditingDriver] = useState(null);
     const [dropdownOpen, setDropdownOpen] = useState(null);
     
-    // 2. CALL THE HOOK TO GET THE FUNCTION
+   
     const { updateDriverStats } = useDriverStatus();
  
     useEffect(() => {
@@ -31,12 +30,12 @@ const DriverList = () => {
         
             const driversWithStatus = data.map(driver => ({
                 ...driver,
-                // CRITICAL: Ensure 'isAvailable' state reflects the API's status field (e.g., 'isActive')
+         
                 isAvailable: driver.isActive !== undefined ? driver.isActive : false, 
             }));
             setDrivers(driversWithStatus);
 
-            // 3. CALCULATE AND UPDATE CONTEXT
+     
             const activeCount = driversWithStatus.filter(d => d.isAvailable).length;
             const totalCount = driversWithStatus.length;
             const inactiveCount = totalCount - activeCount;
@@ -52,14 +51,13 @@ const DriverList = () => {
         }
     };
 
-    // Reset everything after Add / Edit
     const resetView = () => {
         setEditingDriver(null);
         setShowForm(false);
-        fetchDrivers(); // Re-fetch to update the table AND the Dashboard widget
+        fetchDrivers(); 
     };
 
-    // Delete a driver
+    
     const handleDelete = async (driverId) => {
         if (window.confirm("Are you sure you want to delete this driver?")) {
             try {
@@ -70,16 +68,14 @@ const DriverList = () => {
                 alert("Failed to delete driver.");
             }
         }
-        setDropdownOpen(null); // close dropdown
+        setDropdownOpen(null); 
     };
 
 
-    // DriverList.js
 
     const handleToggleStatus = async (driverId, currentStatus) => {
         const newStatus = !currentStatus;
-        
-        // 1. OPTIMISTIC UI UPDATE
+     
         setDrivers(prevDrivers => 
             prevDrivers.map(d => 
                 d.id === driverId ? { ...d, isAvailable: newStatus } : d 
@@ -87,18 +83,17 @@ const DriverList = () => {
         );
 
         try {
-            // 2. API CALL
+            
             await editDriver(driverId, { isActive: newStatus }); 
             
-            // 3. SYNCHRONIZATION & CONTEXT UPDATE
-            // Re-fetch ensures the Dashboard status is updated after a successful toggle
+           
             fetchDrivers(); 
 
         } catch (error) {
             console.error("Failed to update driver status. Reverting local state:", error);
             alert("Failed to update status.");
             
-            // 4. REVERT LOCAL STATE
+          
             setDrivers(prevDrivers => 
                 prevDrivers.map(d => 
                     d.id === driverId ? { ...d, isAvailable: currentStatus } : d 
@@ -134,7 +129,7 @@ const DriverList = () => {
             </div>
 
 
-            {/* FORM SECTION */}
+        
              {showForm && (
                 <div className="driverlist-card"> 
                     <DriverForm 
@@ -154,7 +149,6 @@ const DriverList = () => {
                 </div>
             )}
 
-            {/* TABLE SECTION */}
             {!showForm && (
                 <div className="driverlist-card">
                     <h2 className="driverlist-title">Driver Directory</h2> 
